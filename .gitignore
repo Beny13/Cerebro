@@ -13,3 +13,4 @@ nb-configuration.xml
 # Package Files #
 *.war
 *.ear
+/nbproject/

@@ -65,24 +65,26 @@ public class Model {
         return tree;
     }
 
-    public void addScore(String heroName, ArrayList<String> questions, ArrayList<String> answers) {
-        Hero hero = em
-            .createNamedQuery("Hero.findByCharacterName", Hero.class)
-            .setParameter("characterId", heroName)
-            .getSingleResult()
+    // public void addScore(String heroName, ArrayList<String> questions, ArrayList<String> answers) {
+    public void addScore(String heroName, ArrayList<String> questions) {
+        //////// Soit toutes les questions sont OUI ou NON
+        //////// alors on a pas besoin des réponses
+        //////// sinon il faut aussi passer les réponses (pour filtrer les ptet)
+        List<Answer> answers = em
+            .createNamedQuery("Answer.findByQuestionNameAndHeroName", Answer.class)
+            .setParameter("questions", questions)
+            .setParameter("characterName", heroName)
+            .getResultList()
         ;
-
-        /*
-        SELECT *
-        FROM answer a
-        INNER JOIN hero h ON h.characterId
-        INNER JOIN question q ON q.questionId
-        WHERE q.questionText
-        IN (
-        "Votre personnage peut-il mourir ?", "Le personnage fait-il partie des Watchmen ?"
-        )
-        */
-
+        
+        for (Answer answer : answers) {
+            answer.setAnswerScore(answer.getAnswerScore() + 1);
+        }
+        
+        em.getTransaction().begin();
+        em.flush();
+        em.getTransaction().commit();
+        em.close();
 
     }
 }
