@@ -25,7 +25,7 @@ public class Game {
         boolean propositionVraie = false;
         ArrayList<String> questionsFloues = new ArrayList<String>();
         ArrayList<String> userResponseIntitule = new ArrayList<String>();
-        ArrayList<Boolean> userResponseValue = new ArrayList<Boolean>();
+        ArrayList<String> userResponseValue = new ArrayList<String>();
         
         
         while (!propositionVraie) {
@@ -51,19 +51,35 @@ public class Game {
 //                          inputUser();
 //                        //TODO ajouter la question ET LA REPONSE dans la DB
 //                        //TODO ajouter personnage dans la DB
+                          //TODO ajouter aussi les réponses des questions précédentes SAUF LES PEUT ETRE
 //                        //TODO pour tous les anciens persos, mettre la réponse a la nouvelle question a true
 //                        }
                     }
                     String qFloueCourante = questionsFloues.get(questionsFloues.size()-1);
                     int idQCourante = userResponseIntitule.indexOf(qFloueCourante);
-                    userResponseValue.set(idQCourante,!userResponseValue.get(idQCourante));
+                    //userResponseValue.set(idQCourante,!userResponseValue.get(idQCourante));
                     questionsFloues.remove(questionsFloues.size()-1);
                     
-//                    TODO redescendre sur l'arbre. Comment pourquoi qui quand ou ?
+//                    TODO redescendre sur l'arbre
                 }
             } else {
                 //On est forcement dans un noeud
-                
+                System.out.println(currentNode.m_Attribute);
+                userResponseIntitule.add(currentNode.m_Attribute.toString());
+                String CurrentResponse = inputUser();
+                userResponseValue.add(CurrentResponse);
+                switch(CurrentResponse){
+                    case "Probablement oui" :
+                        questionsFloues.add(currentNode.m_Attribute.name());
+                    case "Oui" :
+                        currentNode = currentNode.m_Successors[1];
+                        break;
+                    case "Probablement non" :
+                        questionsFloues.add(currentNode.m_Attribute.name());
+                    case "Non" :
+                        currentNode = currentNode.m_Successors[0];
+                        break;
+                }     
             }
         }
     }
