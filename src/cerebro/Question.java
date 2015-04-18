@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q"),
     @NamedQuery(name = "Question.findByQuestionId", query = "SELECT q FROM Question q WHERE q.questionId = :questionId"),
-    @NamedQuery(name = "Question.findByQuestionText", query = "SELECT q FROM Question q WHERE q.questionText = :questionText")})
+    @NamedQuery(name = "Question.findByQuestionText", query = "SELECT q FROM Question q WHERE q.questionText = :questionText"),
+    @NamedQuery(name = "Question.findByNotInQuestionTexts", query = "SELECT q FROM Question q WHERE q.questionText NOT IN :questionTexts")})
 public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

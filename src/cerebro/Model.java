@@ -1,5 +1,6 @@
 package cerebro;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class Model {
             arff += hero.getCharacterName() + "\n";
         }
 
+        System.out.println(arff);
         return arff;
     }
 
@@ -80,11 +82,97 @@ public class Model {
         for (Answer answer : answers) {
             answer.setAnswerScore(answer.getAnswerScore() + 1);
         }
+    }
+    
+    public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, ArrayList<String> questions, ArrayList<String> answers) {
+        Question newQuestion = new Question();
+        newQuestion.setQuestionText(newQuestionText);
+        this.persist(newQuestion);
         
+        // Setting old heros
+        List<Hero> heros = em.createNamedQuery("Hero.findAll", Hero.class).getResultList();
+        for (Hero hero : heros) {
+            Answer tmpAnswer = new Answer();
+            tmpAnswer.setAnswerPK(new AnswerPK(hero.getCharacterId(), newQuestion.getQuestionId()));
+            tmpAnswer.setAnswerValue(true);
+            tmpAnswer.setAnswerScore(0);
+            this.persist(tmpAnswer);
+        }
+        
+        // Setting new hero
+        Hero newHero = new Hero();
+        newHero.setCharacterName(heroName);
+        this.persist(newHero);
+        
+        // Adding answer for new question
+        Answer newAnswer = new Answer();
+        newAnswer.setAnswerPK(new AnswerPK(newHero.getCharacterId(), newQuestion.getQuestionId()));
+        newAnswer.setAnswerValue(newAnswerValue);
+        newAnswer.setAnswerScore(2);
+        this.persist(newAnswer);
+        
+        // Adding answers for old questions that have been answered
+        // ArrayList<Question> oldQuestions = new ArrayList<Question>();
+        int index = 0;
+        for (String question : questions) {
+            // We dont want to add the same answer twice
+            if (question.equals(newQuestionText)) {
+                break;
+            }
+            
+            Question oldQuestion = em
+                .createNamedQuery("Question.findByQuestionText", Question.class)
+                .setParameter("questionText", question)
+                .getSingleResult()
+            ;
+            
+            Answer newAnswerForOldQuestion = new Answer();
+            newAnswerForOldQuestion.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldQuestion.getQuestionId()));
+            newAnswerForOldQuestion.setAnswerValue(answers.get(index).equals("Oui"));
+            newAnswerForOldQuestion.setAnswerScore(2);
+            this.persist(newAnswer);
+            ++index;
+        }
+        
+        // Adding answers for old questions that have NOT been answered
+        List<Question> oldNoAnswerQuestions = em
+            .createNamedQuery("Question.findByNotInQuestionTexts", Question.class)
+            .setParameter("questionTexts", questions)
+            .getResultList()
+        ;
+        
+        for (Question oldNoAnswerQuestion : oldNoAnswerQuestions) {
+            // We dont want to add the same answer twice
+            if (oldNoAnswerQuestion.getQuestionText().equals(newQuestionText)) {
+                break;
+            }
+            
+            Answer oldAnswer = new Answer();
+            oldAnswer.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldNoAnswerQuestion.getQuestionId()));
+            oldAnswer.setAnswerValue(true);
+            oldAnswer.setAnswerScore(0);
+            this.persist(oldAnswer);
+        }
+        
+        // Flushing
+        this.flush();
+    }
+
+    private void persist(Object object) {
+        em.getTransaction().begin();
+        try {
+            em.persist(object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+    }
+    
+    private void flush() {
         em.getTransaction().begin();
         em.flush();
         em.getTransaction().commit();
-        em.close();
-
     }
+    
 }
