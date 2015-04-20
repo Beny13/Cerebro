@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Game {
     private final Id3 tree;
     private Id3 currentNode;
+    private Model model;
     
     public Game(Id3 tree) {
         this.tree = tree;
@@ -37,23 +38,28 @@ public class Game {
                 propositionVraie = this.inputUser(new String[]{"y","n"}).equals("y");
                 if (propositionVraie) {
                     //C'est le GG
-                    //Ajouter banane
+                    //Ajouter points
                 } else {
                     //OMG YOU SUCK
                     if (questionsFloues.isEmpty()) {
 //                        //on s'a gourré
-//                        System.out.println("Qui est votre personnage ?");
-//                        inputUser();
-//                        if(Le perso existe déjà dans la DB) {
-//                            //EleverPoint...
-//                        } else {
-//                          System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
-//                          inputUser();
-//                        //TODO ajouter la question ET LA REPONSE dans la DB
-//                        //TODO ajouter personnage dans la DB
-                          //TODO ajouter aussi les réponses des questions précédentes SAUF LES PEUT ETRE
-//                        //TODO pour tous les anciens persos, mettre la réponse a la nouvelle question a true
-//                        }
+                        System.out.println("Qui est votre personnage ?");
+                        String newHero = inputUser();
+                        if(model.characterAlreadyExists(newHero)) {
+                            //EleverPoint...
+                        } else {
+                          System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
+                          String newQuestion = inputUser();
+                            System.out.println(newQuestion + " ? Y/N");
+                            String newResponse = inputUser();
+                            boolean ResponseValue;
+                            ResponseValue = newResponse.equals("Oui");
+                            model.addNewHero(newHero,newQuestion,ResponseValue,userResponseIntitule,userResponseValue);
+//                        //ONGOING ajouter la question ET LA REPONSE dans la DB
+//                        //ONGOING ajouter personnage dans la DB
+                          //ONGOING, virer les maybe. ajouter aussi les réponses des questions précédentes SAUF LES PEUT ETRE
+//                        //ONGOING pour tous les anciens persos, mettre la réponse a la nouvelle question a true
+                        }
                     }
                     String qFloueCourante = questionsFloues.get(questionsFloues.size()-1);
                     int idQCourante = userResponseIntitule.indexOf(qFloueCourante);
