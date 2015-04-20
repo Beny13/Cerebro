@@ -46,7 +46,7 @@ public class Game {
                         System.out.println("Qui est votre personnage ?");
                         String newHero = inputUser();
                         if(model.characterAlreadyExists(newHero)) {
-                            //EleverPoint...
+                            //EnleverPoint...
                         } else {
                           System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
                           String newQuestion = inputUser();
