@@ -31,7 +31,7 @@ public class Game {
                 propositionVraie = this.inputUser(new String[]{"y","n"}).equals("y");
                 if(propositionVraie) {
                     //C'est le GG
-                    //Ajouter 
+                    //Ajouter banane
                 }
             }
         }

@@ -2,6 +2,7 @@ package cerebro;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -62,5 +63,26 @@ public class Model {
         tree.buildClassifier(data);
 
         return tree;
+    }
+
+    public void addScore(String heroName, ArrayList<String> questions, ArrayList<String> answers) {
+        Hero hero = em
+            .createNamedQuery("Hero.findByCharacterName", Hero.class)
+            .setParameter("characterId", heroName)
+            .getSingleResult()
+        ;
+
+        /*
+        SELECT *
+        FROM answer a
+        INNER JOIN hero h ON h.characterId
+        INNER JOIN question q ON q.questionId
+        WHERE q.questionText
+        IN (
+        "Votre personnage peut-il mourir ?", "Le personnage fait-il partie des Watchmen ?"
+        )
+        */
+
+
     }
 }
