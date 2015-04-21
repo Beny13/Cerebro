@@ -72,21 +72,22 @@ public class Game {
                         String invertedrep = (userResponseValue.get(idQCourante).equals("probablement oui"))?"non":"oui";
                         this.userResponseValue.set(idQCourante,invertedrep);
                         questionsFloues.remove(questionsFloues.size()-1);
-                        Id3 newCurrentNode = tree;
-                        
+
+                        currentNode = tree;
+
                         String previousQuestion = "";
 //                        while(!newCurrentNode.m_Attribute.name().equals(qFloueCourante)) {
                         while(!previousQuestion.equals(qFloueCourante)) {
-                            String currentNodeResponse = userResponseValue.get(userResponseIntitule.indexOf(newCurrentNode.m_Attribute.name()));
+                            String currentNodeResponse = userResponseValue.get(userResponseIntitule.indexOf(currentNode.m_Attribute.name()));
                             previousQuestion = currentNode.m_Attribute.name();
                             if (currentNodeResponse.equals("oui") || currentNodeResponse.equals("probablement oui")) {
-                                newCurrentNode = currentNode.m_Successors[1];
+                                currentNode = currentNode.m_Successors[1];
                             } else {
-                                newCurrentNode = currentNode.m_Successors[0];
+                                currentNode = currentNode.m_Successors[0];
                             }
                         }
-                        
-                        
+
+
     //                    TODO redescendre sur l'arbre
                     }
                 }
