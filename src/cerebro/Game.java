@@ -18,18 +18,18 @@ public class Game {
     private Model model;
     private ArrayList<String> userResponseIntitule = new ArrayList<String>();
     private ArrayList<String> userResponseValue = new ArrayList<String>();
-    
+
     public Game(Id3 tree) {
         this.tree = tree;
         this.currentNode = tree;
     }
-    
+
     public void start() {
         boolean propositionVraie = false;
         ArrayList<String> questionsFloues = new ArrayList<String>();
-        
-        
-        
+
+
+
         while (!propositionVraie) {
             if (this.currentNode.m_Successors.length == 0) {
                 System.out.println("Votre personnnage est-il ");
@@ -65,7 +65,7 @@ public class Game {
                     String invertedrep = (userResponseValue.get(idQCourante).equals("oui"))?"non":"oui";
                     this.userResponseValue.set(idQCourante,invertedrep);
                     questionsFloues.remove(questionsFloues.size()-1);
-                    
+
 //                    TODO redescendre sur l'arbre
                 }
             } else {
@@ -85,12 +85,12 @@ public class Game {
                     case "non" :
                         currentNode = currentNode.m_Successors[0];
                         break;
-                }     
+                }
             }
         }
     }
-    
-    
+
+
     private String inputUser(String[] rep) {
         Scanner sc = new Scanner(System.in);
         String result = sc.nextLine();
@@ -100,13 +100,12 @@ public class Game {
         }
         return result;
     }
-    
+
     private String inputUser() {
         Scanner sc = new Scanner(System.in);
-        String result = sc.nextLine();
         return sc.nextLine();
     }
-    
+
     private void deleteMaybe(){
         for(String s : this.userResponseValue) {
             if(!s.equals("oui") && !s.equals("non")) {
