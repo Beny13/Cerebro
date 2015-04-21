@@ -66,14 +66,29 @@ public class Game {
                             // End here
                             return;
                         }
+                    } else {
+                        String qFloueCourante = questionsFloues.get(questionsFloues.size()-1);
+                        int idQCourante = userResponseIntitule.indexOf(qFloueCourante);
+                        String invertedrep = (userResponseValue.get(idQCourante).equals("probablement oui"))?"non":"oui";
+                        this.userResponseValue.set(idQCourante,invertedrep);
+                        questionsFloues.remove(questionsFloues.size()-1);
+                        Id3 newCurrentNode = tree;
+                        
+                        String previousQuestion = "";
+//                        while(!newCurrentNode.m_Attribute.name().equals(qFloueCourante)) {
+                        while(!previousQuestion.equals(qFloueCourante)) {
+                            String currentNodeResponse = userResponseValue.get(userResponseIntitule.indexOf(newCurrentNode.m_Attribute.name()));
+                            previousQuestion = currentNode.m_Attribute.name();
+                            if (currentNodeResponse.equals("oui") || currentNodeResponse.equals("probablement oui")) {
+                                newCurrentNode = currentNode.m_Successors[1];
+                            } else {
+                                newCurrentNode = currentNode.m_Successors[0];
+                            }
+                        }
+                        
+                        
+    //                    TODO redescendre sur l'arbre
                     }
-                    String qFloueCourante = questionsFloues.get(questionsFloues.size()-1);
-                    int idQCourante = userResponseIntitule.indexOf(qFloueCourante);
-                    String invertedrep = (userResponseValue.get(idQCourante).equals("oui"))?"non":"oui";
-                    this.userResponseValue.set(idQCourante,invertedrep);
-                    questionsFloues.remove(questionsFloues.size()-1);
-
-//                    TODO redescendre sur l'arbre
                 }
             } else {
                 //On est forcement dans un noeud
