@@ -48,7 +48,6 @@ public class Model {
             arff += hero.getCharacterName() + "\n";
         }
 
-        // System.out.println(arff);
         return arff;
     }
 
@@ -67,11 +66,6 @@ public class Model {
     }
 
     public void changeScore(String heroName, ArrayList<String> questions, ArrayList<String> userAnswers) {
-        System.out.println("Calling changeScore with");
-        System.out.println(heroName);
-        System.out.println(questions);
-        System.out.println(userAnswers);
-
         // Les "peut-etre" sont filtrés
         List<Answer> answers = em
             .createNamedQuery("Answer.findByQuestionNameAndHeroName", Answer.class)
@@ -108,7 +102,7 @@ public class Model {
         for (Hero hero : heros) {
             Answer tmpAnswer = new Answer();
             tmpAnswer.setAnswerPK(new AnswerPK(hero.getCharacterId(), newQuestion.getQuestionId()));
-            tmpAnswer.setAnswerValue(true);
+            tmpAnswer.setAnswerValue(false);
             tmpAnswer.setAnswerScore(0);
             this.persist(tmpAnswer);
         }
@@ -126,13 +120,8 @@ public class Model {
         this.persist(newAnswer);
 
         // Adding answers for old questions that have been answered
-        // ArrayList<Question> oldQuestions = new ArrayList<Question>();
         int index = 0;
         for (String question : questions) {
-            // We dont want to add the same answer twice
-            if (question.equals(newQuestionText)) {
-                break;
-            }
 
             Question oldQuestion = em
                 .createNamedQuery("Question.findByQuestionText", Question.class)
@@ -140,11 +129,15 @@ public class Model {
                 .getSingleResult()
             ;
 
+
+            // TODO INVESTIGER
+            // LE PERSIST EST CASSE !
+
             Answer newAnswerForOldQuestion = new Answer();
             newAnswerForOldQuestion.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldQuestion.getQuestionId()));
             newAnswerForOldQuestion.setAnswerValue(answers.get(index).equals("oui"));
             newAnswerForOldQuestion.setAnswerScore(2);
-            this.persist(newAnswer);
+            this.persist(newAnswerForOldQuestion);
             ++index;
         }
 
@@ -158,12 +151,12 @@ public class Model {
         for (Question oldNoAnswerQuestion : oldNoAnswerQuestions) {
             // We dont want to add the same answer twice
             if (oldNoAnswerQuestion.getQuestionText().equals(newQuestionText)) {
-                break;
+                continue;
             }
 
             Answer oldAnswer = new Answer();
             oldAnswer.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldNoAnswerQuestion.getQuestionId()));
-            oldAnswer.setAnswerValue(true);
+            oldAnswer.setAnswerValue(false);
             oldAnswer.setAnswerScore(0);
             this.persist(oldAnswer);
         }

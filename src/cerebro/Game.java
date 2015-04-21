@@ -40,6 +40,8 @@ public class Game {
                 if (propositionVraie) {
                     //C'est le GG
                     model.changeScore(suggestedHero, this.userResponseIntitule, this.userResponseValue);
+                    // End here
+                    return;
                 } else {
                     //OMG YOU SUCK
                     if (questionsFloues.isEmpty()) {
@@ -49,6 +51,8 @@ public class Game {
                         if(model.characterAlreadyExists(newHero)) {
                             System.out.println("Ce personnage existe déjà dans la base de données. Ses informations ont été mises à jour selon vos réponses.");
                             model.changeScore(newHero,this.userResponseIntitule,this.userResponseValue);
+                            // End here
+                            return;
                         } else {
                           System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
                           String newQuestion = inputUser();
@@ -58,6 +62,9 @@ public class Game {
                             ResponseValue = newResponse.equals("oui");
                             deleteMaybe();
                             model.addNewHero(newHero,newQuestion,ResponseValue,userResponseIntitule,userResponseValue);
+
+                            // End here
+                            return;
                         }
                     }
                     String qFloueCourante = questionsFloues.get(questionsFloues.size()-1);
