@@ -1,6 +1,5 @@
 package cerebro;
 
-import java.awt.BorderLayout;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -69,6 +68,8 @@ public class Model {
 
     // public void addScore(String heroName, ArrayList<String> questions, ArrayList<String> answers) {
     public void addScore(String heroName, ArrayList<String> questions) {
+
+        // TODO PRENDRE EN COMPTE LES REPONSES FAUSSES !!!!!!!
         //////// Soit toutes les questions sont OUI ou NON
         //////// alors on a pas besoin des réponses
         //////// sinon il faut aussi passer les réponses (pour filtrer les ptet)
@@ -78,17 +79,17 @@ public class Model {
             .setParameter("characterName", heroName)
             .getResultList()
         ;
-        
+
         for (Answer answer : answers) {
             answer.setAnswerScore(answer.getAnswerScore() + 1);
         }
     }
-    
+
     public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, ArrayList<String> questions, ArrayList<String> answers) {
         Question newQuestion = new Question();
         newQuestion.setQuestionText(newQuestionText);
         this.persist(newQuestion);
-        
+
         // Setting old heros
         List<Hero> heros = em.createNamedQuery("Hero.findAll", Hero.class).getResultList();
         for (Hero hero : heros) {
@@ -98,19 +99,19 @@ public class Model {
             tmpAnswer.setAnswerScore(0);
             this.persist(tmpAnswer);
         }
-        
+
         // Setting new hero
         Hero newHero = new Hero();
         newHero.setCharacterName(heroName);
         this.persist(newHero);
-        
+
         // Adding answer for new question
         Answer newAnswer = new Answer();
         newAnswer.setAnswerPK(new AnswerPK(newHero.getCharacterId(), newQuestion.getQuestionId()));
         newAnswer.setAnswerValue(newAnswerValue);
         newAnswer.setAnswerScore(2);
         this.persist(newAnswer);
-        
+
         // Adding answers for old questions that have been answered
         // ArrayList<Question> oldQuestions = new ArrayList<Question>();
         int index = 0;
@@ -119,13 +120,13 @@ public class Model {
             if (question.equals(newQuestionText)) {
                 break;
             }
-            
+
             Question oldQuestion = em
                 .createNamedQuery("Question.findByQuestionText", Question.class)
                 .setParameter("questionText", question)
                 .getSingleResult()
             ;
-            
+
             Answer newAnswerForOldQuestion = new Answer();
             newAnswerForOldQuestion.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldQuestion.getQuestionId()));
             newAnswerForOldQuestion.setAnswerValue(answers.get(index).equals("Oui"));
@@ -133,27 +134,27 @@ public class Model {
             this.persist(newAnswer);
             ++index;
         }
-        
+
         // Adding answers for old questions that have NOT been answered
         List<Question> oldNoAnswerQuestions = em
             .createNamedQuery("Question.findByNotInQuestionTexts", Question.class)
             .setParameter("questionTexts", questions)
             .getResultList()
         ;
-        
+
         for (Question oldNoAnswerQuestion : oldNoAnswerQuestions) {
             // We dont want to add the same answer twice
             if (oldNoAnswerQuestion.getQuestionText().equals(newQuestionText)) {
                 break;
             }
-            
+
             Answer oldAnswer = new Answer();
             oldAnswer.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldNoAnswerQuestion.getQuestionId()));
             oldAnswer.setAnswerValue(true);
             oldAnswer.setAnswerScore(0);
             this.persist(oldAnswer);
         }
-        
+
         // Flushing
         this.flush();
     }
@@ -168,7 +169,7 @@ public class Model {
             em.getTransaction().rollback();
         }
     }
-    
+
     private void flush() {
         em.getTransaction().begin();
         em.flush();
@@ -176,7 +177,13 @@ public class Model {
     }
 
     boolean characterAlreadyExists(String newHero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Hero> heros = em
+            .createNamedQuery("Hero.findByCharacterName", Hero.class)
+            .setParameter("characterName", newHero)
+            .getResultList()
+        ;
+
+        return heros.size() > 0;
     }
-    
+
 }
