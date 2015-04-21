@@ -7,7 +7,6 @@
     <class>cerebro.Question</class>
     <properties>
       <property name="eclipselink.logging.logger" value="org.eclipse.persistence.logging.DefaultSessionLog"/>
-      <property name="eclipselink.logging.level" value="FINE" />
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://mysql.montpellier.epsi.fr:5206/Cerebro?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="cerebro"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

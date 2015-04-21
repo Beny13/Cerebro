@@ -89,13 +89,13 @@ public class Id3
   public Attribute m_Attribute;
 
   /** Class value if node is leaf. */
-  private double m_ClassValue;
+  public double m_ClassValue;
 
   /** Class distribution if node is leaf. */
   private double[] m_Distribution;
 
   /** Class attribute of dataset. */
-  private Attribute m_ClassAttribute;
+  public Attribute m_ClassAttribute;
 
   /**
    * Returns a string describing the classifier.
