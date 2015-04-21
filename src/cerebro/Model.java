@@ -67,6 +67,11 @@ public class Model {
     }
 
     public void changeScore(String heroName, ArrayList<String> questions, ArrayList<String> userAnswers) {
+        System.out.println("Calling changeScore with");
+        System.out.println(heroName);
+        System.out.println(questions);
+        System.out.println(userAnswers);
+
         // Les "peut-etre" sont filtrés
         List<Answer> answers = em
             .createNamedQuery("Answer.findByQuestionNameAndHeroName", Answer.class)
@@ -77,7 +82,7 @@ public class Model {
 
         for (Answer answer : answers) {
             String currentUserAnswer = userAnswers.get(questions.indexOf(answer.getQuestion().getQuestionText()));
-            if (answer.getAnswerValue().equals(currentUserAnswer.equals("true"))) {
+            if (answer.getAnswerValue().equals(currentUserAnswer.equals("oui"))) {
                 answer.setAnswerScore(answer.getAnswerScore() + 1);
             } else {
                 int newScore = answer.getAnswerScore() - 1;
@@ -89,6 +94,8 @@ public class Model {
                 answer.setAnswerScore(newScore);
             }
         }
+
+        this.flush();
     }
 
     public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, ArrayList<String> questions, ArrayList<String> answers) {

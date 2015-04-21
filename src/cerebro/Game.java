@@ -22,24 +22,24 @@ public class Game {
     public Game(Id3 tree) {
         this.tree = tree;
         this.currentNode = tree;
+        this.model = new Model();
     }
 
     public void start() {
         boolean propositionVraie = false;
         ArrayList<String> questionsFloues = new ArrayList<String>();
 
-
-
         while (!propositionVraie) {
-            if (this.currentNode.m_Successors.length == 0) {
+            if (this.currentNode.m_Successors == null) {
+                String suggestedHero = this.currentNode.m_ClassAttribute.value((int) this.currentNode.m_ClassValue);
                 System.out.println("Votre personnnage est-il ");
-                System.out.println(this.currentNode.m_Attribute.name());
+                System.out.println(suggestedHero);
 //                System.out.println(this.currentNode.m_Attribute);
                 System.out.println("? y/n");
                 propositionVraie = this.inputUser(new String[]{"y","n"}).equals("y");
                 if (propositionVraie) {
                     //C'est le GG
-                    model.changeScore(this.currentNode.m_Attribute.name(),this.userResponseIntitule, this.userResponseValue);
+                    model.changeScore(suggestedHero, this.userResponseIntitule, this.userResponseValue);
                 } else {
                     //OMG YOU SUCK
                     if (questionsFloues.isEmpty()) {
@@ -71,7 +71,7 @@ public class Game {
             } else {
                 //On est forcement dans un noeud
                 System.out.println(currentNode.m_Attribute.name());
-                userResponseIntitule.add(currentNode.m_Attribute.toString());
+                userResponseIntitule.add(currentNode.m_Attribute.name());
                 String CurrentResponse = inputUser();
                 userResponseValue.add(CurrentResponse);
                 switch(CurrentResponse){
