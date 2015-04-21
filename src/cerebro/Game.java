@@ -39,7 +39,7 @@ public class Game {
                 propositionVraie = this.inputUser(new String[]{"y","n"}).equals("y");
                 if (propositionVraie) {
                     //C'est le GG
-                    model.changeScore(this.userResponseIntitule, this.userResponseValue, this.currentNode.m_Attribute.name());
+                    model.changeScore(this.currentNode.m_Attribute.name(),this.userResponseIntitule, this.userResponseValue);
                 } else {
                     //OMG YOU SUCK
                     if (questionsFloues.isEmpty()) {
@@ -48,11 +48,11 @@ public class Game {
                         String newHero = inputUser();
                         if(model.characterAlreadyExists(newHero)) {
                             System.out.println("Ce personnage existe déjà dans la base de données. Ses informations ont été mises à jour selon vos réponses.");
-                            model.changeScore(this.userResponseIntitule,this.userResponseValue,newHero);
+                            model.changeScore(newHero,this.userResponseIntitule,this.userResponseValue);
                         } else {
                           System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
-                          String newQuestion = inputUser();
-                            System.out.println(newQuestion + " ? oui/non/probablement oui/probablement non");
+                          String newQuestion = inputUser(new String[]{"oui","non"});
+                            System.out.println(newQuestion + " ? oui/non");
                             String newResponse = inputUser();
                             boolean ResponseValue;
                             ResponseValue = newResponse.equals("oui");
@@ -62,7 +62,8 @@ public class Game {
                     }
                     String qFloueCourante = questionsFloues.get(questionsFloues.size()-1);
                     int idQCourante = userResponseIntitule.indexOf(qFloueCourante);
-                    //userResponseValue.set(idQCourante,!userResponseValue.get(idQCourante));
+                    String invertedrep = (userResponseValue.get(idQCourante).equals("oui"))?"non":"oui";
+                    this.userResponseValue.set(idQCourante,invertedrep);
                     questionsFloues.remove(questionsFloues.size()-1);
                     
 //                    TODO redescendre sur l'arbre
