@@ -135,7 +135,7 @@ public class Model {
 
             Answer newAnswerForOldQuestion = new Answer();
             newAnswerForOldQuestion.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldQuestion.getQuestionId()));
-            newAnswerForOldQuestion.setAnswerValue(answers.get(index).equals("Oui"));
+            newAnswerForOldQuestion.setAnswerValue(answers.get(index).equals("oui"));
             newAnswerForOldQuestion.setAnswerScore(2);
             this.persist(newAnswer);
             ++index;
