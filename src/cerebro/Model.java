@@ -174,5 +174,9 @@ public class Model {
         em.flush();
         em.getTransaction().commit();
     }
+
+    boolean characterAlreadyExists(String newHero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
