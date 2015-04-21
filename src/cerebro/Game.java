@@ -103,7 +103,6 @@ public class Game {
     
     private String inputUser() {
         Scanner sc = new Scanner(System.in);
-        String result = sc.nextLine();
         return sc.nextLine();
     }
     
