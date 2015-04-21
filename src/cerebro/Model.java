@@ -48,7 +48,7 @@ public class Model {
             arff += hero.getCharacterName() + "\n";
         }
 
-        System.out.println(arff);
+        // System.out.println(arff);
         return arff;
     }
 
