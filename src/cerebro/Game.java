@@ -70,7 +70,7 @@ public class Game {
                 }
             } else {
                 //On est forcement dans un noeud
-                System.out.println(currentNode.m_Attribute);
+                System.out.println(currentNode.m_Attribute.name());
                 userResponseIntitule.add(currentNode.m_Attribute.toString());
                 String CurrentResponse = inputUser();
                 userResponseValue.add(CurrentResponse);
