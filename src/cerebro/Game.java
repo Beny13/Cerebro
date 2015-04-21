@@ -72,8 +72,6 @@ public class Game {
                 //On est forcement dans un noeud
                 System.out.println(currentNode.m_Attribute.name());
                 userResponseIntitule.add(currentNode.m_Attribute.name());
-                String CurrentResponse = inputUser();
-                userResponseIntitule.add(currentNode.m_Attribute.toString());
                 String CurrentResponse = inputUser(new String[]{"oui","non","probablement oui","probablement non"});
                 userResponseValue.add(CurrentResponse);
                 switch(CurrentResponse){
