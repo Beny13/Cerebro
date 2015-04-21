@@ -66,13 +66,8 @@ public class Model {
         return tree;
     }
 
-    // public void addScore(String heroName, ArrayList<String> questions, ArrayList<String> answers) {
-    public void addScore(String heroName, ArrayList<String> questions) {
-
-        // TODO PRENDRE EN COMPTE LES REPONSES FAUSSES !!!!!!!
-        //////// Soit toutes les questions sont OUI ou NON
-        //////// alors on a pas besoin des réponses
-        //////// sinon il faut aussi passer les réponses (pour filtrer les ptet)
+    public void changeScore(String heroName, ArrayList<String> questions, ArrayList<String> userAnswers) {
+        // Les "peut-etre" sont filtrés
         List<Answer> answers = em
             .createNamedQuery("Answer.findByQuestionNameAndHeroName", Answer.class)
             .setParameter("questions", questions)
@@ -81,7 +76,18 @@ public class Model {
         ;
 
         for (Answer answer : answers) {
-            answer.setAnswerScore(answer.getAnswerScore() + 1);
+            String currentUserAnswer = userAnswers.get(questions.indexOf(answer.getQuestion().getQuestionText()));
+            if (answer.getAnswerValue().equals(currentUserAnswer.equals("true"))) {
+                answer.setAnswerScore(answer.getAnswerScore() + 1);
+            } else {
+                int newScore = answer.getAnswerScore() - 1;
+                if (newScore < 0) {
+                    // Switch answer
+                    answer.setAnswerValue(!answer.getAnswerValue());
+                    newScore = 0;
+                }
+                answer.setAnswerScore(newScore);
+            }
         }
     }
 
