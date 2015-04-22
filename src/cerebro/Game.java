@@ -54,14 +54,15 @@ public class Game {
                             // End here
                             return;
                         } else {
-                          System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
-                          String newQuestion = inputUser();
-                            System.out.println(newQuestion + " ? oui/non");
+                            System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
+                            String newQuestion = inputUser();
+                            System.out.println("Quelle est la réponse à cette question pour votre personnage ? oui/non");
                             String newResponse = inputUser(new String[]{"oui","non"});
                             boolean ResponseValue;
                             ResponseValue = newResponse.equals("oui");
                             deleteMaybe();
-                            model.addNewHero(newHero,newQuestion,ResponseValue,userResponseIntitule,userResponseValue);
+                            model.addNewHero(newHero,newQuestion,ResponseValue,suggestedHero);
+                            System.out.println("Votre héros à bien été ajouté !");
 
                             // End here
                             return;
