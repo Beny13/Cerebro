@@ -35,8 +35,8 @@ public class Game {
                 System.out.println("Votre personnnage est-il ");
                 System.out.println(suggestedHero);
 //                System.out.println(this.currentNode.m_Attribute);
-                System.out.println("? y/n");
-                propositionVraie = this.inputUser(new String[]{"y","n"}).equals("y");
+                System.out.println("? oui/non");
+                propositionVraie = this.inputUser(new String[]{"oui","non"}).equals("oui");
                 if (propositionVraie) {
                     //C'est le GG
                     model.changeScore(suggestedHero, this.userResponseIntitule, this.userResponseValue);
@@ -93,7 +93,7 @@ public class Game {
                 }
             } else {
                 //On est forcement dans un noeud
-                System.out.println(currentNode.m_Attribute.name());
+                System.out.println(currentNode.m_Attribute.name() + " oui/non/probablement oui/probablement non");
                 userResponseIntitule.add(currentNode.m_Attribute.name());
                 String CurrentResponse = inputUser(new String[]{"oui","non","probablement oui","probablement non"});
                 userResponseValue.add(CurrentResponse);

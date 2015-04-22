@@ -4,7 +4,7 @@ public class Cerebro {
     public static void main(String[] args) throws Exception {
         Model model = new Model();
         Id3 tree = model.getTreeFromDB();
-        System.out.println(tree);
+//        System.out.println(tree);
         Game game = new Game(tree);
 
         game.start();
