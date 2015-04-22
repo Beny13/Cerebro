@@ -1,12 +1,17 @@
 package cerebro;
 
+import java.util.Scanner;
+
 public class Cerebro {
     public static void main(String[] args) throws Exception {
         Model model = new Model();
-        Id3 tree = model.getTreeFromDB();
-        Game game = new Game(tree);
-
-        game.start();
+        Scanner sc = new Scanner(System.in);
+        do {
+            Game game = new Game(model.getTreeFromDB());
+            game.start();
+            
+            System.out.println("Voulez-vous lancer une nouvelle partie ? oui/non");  
+        }while(sc.nextLine().equals("oui"));
 
         // Tests
 //        -- addScore
