@@ -18,6 +18,10 @@ public class Model {
         this.em = Persistence.createEntityManagerFactory("CerebroPU").createEntityManager();
     }
 
+    public void clear() {
+        this.em.clear();
+    }
+
     public String getArffStringFromDB() {
         String arff = "";
         arff += "@RELATION Cerebro\n";
@@ -49,6 +53,7 @@ public class Model {
             arff += hero.getCharacterName() + "\n";
         }
 
+        System.out.println(arff);
         return arff;
     }
 
