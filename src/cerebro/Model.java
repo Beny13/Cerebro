@@ -2,6 +2,7 @@ package cerebro;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -53,7 +54,6 @@ public class Model {
             arff += hero.getCharacterName() + "\n";
         }
 
-        System.out.println(arff);
         return arff;
     }
 
@@ -98,7 +98,15 @@ public class Model {
         this.flush();
     }
 
+    public static String stripAccents(String s) {
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+        s = s.replaceAll("[^\\p{InCombiningDiacriticalMarks}]", "");
+        return s;
+    }
+
     public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, String suggestedHero) {
+        heroName = Model.stripAccents(heroName.replaceAll(" ", "_").toLowerCase());
+
         Question newQuestion = new Question();
         newQuestion.setQuestionText(newQuestionText);
         this.persist(newQuestion);
@@ -148,53 +156,6 @@ public class Model {
             copiedAnswer.setAnswerScore(2);
             this.persist(copiedAnswer);
         }
-
-        /*
-        // Adding answers for old questions that have been answered
-        int index = 0;
-        for (String question : questions) {
-            if (question.equals(newQuestionText)) {
-                continue;
-            }
-
-            Question oldQuestion = em
-                .createNamedQuery("Question.findByQuestionText", Question.class)
-                .setParameter("questionText", question)
-                .getSingleResult()
-            ;
-
-
-            // TODO INVESTIGER
-            // LE PERSIST EST CASSE !
-
-            Answer newAnswerForOldQuestion = new Answer();
-            newAnswerForOldQuestion.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldQuestion.getQuestionId()));
-            newAnswerForOldQuestion.setAnswerValue(answers.get(index).equals("oui"));
-            newAnswerForOldQuestion.setAnswerScore(2);
-            this.persist(newAnswerForOldQuestion);
-            ++index;
-        }
-
-        // Adding answers for old questions that have NOT been answered
-        List<Question> oldNoAnswerQuestions = em
-            .createNamedQuery("Question.findByNotInQuestionTexts", Question.class)
-            .setParameter("questionTexts", questions)
-            .getResultList()
-        ;
-
-        for (Question oldNoAnswerQuestion : oldNoAnswerQuestions) {
-            // We dont want to add the same answer twice
-            if (oldNoAnswerQuestion.getQuestionText().equals(newQuestionText)) {
-                continue;
-            }
-
-            Answer oldAnswer = new Answer();
-            oldAnswer.setAnswerPK(new AnswerPK(newHero.getCharacterId(), oldNoAnswerQuestion.getQuestionId()));
-            oldAnswer.setAnswerValue(false);
-            oldAnswer.setAnswerScore(0);
-            this.persist(oldAnswer);
-        }
-        */
 
         // Flushing
         this.flush();
