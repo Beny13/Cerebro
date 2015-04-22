@@ -17,6 +17,7 @@ public class Model {
 
     public Model() {
         this.em = Persistence.createEntityManagerFactory("CerebroPU").createEntityManager();
+        em.getEntityManagerFactory().getCache().evictAll();
     }
 
     public void clear() {
@@ -105,7 +106,9 @@ public class Model {
     }
 
     public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, String suggestedHero) {
-        heroName = Model.stripAccents(heroName.replaceAll(" ", "_").toLowerCase());
+        heroName = heroName.replaceAll(" ", "_").toLowerCase();
+        System.out.println("OOQSDOSQDOSQDOQSDOQSDOQSDOQSDOQSDOQSDO");
+        System.out.println(heroName);
 
         Question newQuestion = new Question();
         newQuestion.setQuestionText(newQuestionText);
