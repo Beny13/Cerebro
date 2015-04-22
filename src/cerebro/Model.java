@@ -122,6 +122,9 @@ public class Model {
         // Adding answers for old questions that have been answered
         int index = 0;
         for (String question : questions) {
+            if (question.equals(newQuestionText)) {
+                continue;
+            }
 
             Question oldQuestion = em
                 .createNamedQuery("Question.findByQuestionText", Question.class)
