@@ -155,7 +155,7 @@ public class Model {
                 answerToCopy.getAnswerPK().getQuestionId()
             ));
             copiedAnswer.setAnswerValue(answerToCopy.getAnswerValue());
-            copiedAnswer.setAnswerScore(2);
+            copiedAnswer.setAnswerScore(0);
             this.persist(copiedAnswer);
         }
 
