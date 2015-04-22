@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cerebro;
 
 import java.util.ArrayList;
@@ -34,18 +29,14 @@ public class Game {
                 String suggestedHero = this.currentNode.m_ClassAttribute.value((int) this.currentNode.m_ClassValue);
                 System.out.println("Votre personnnage est-il ");
                 System.out.println(suggestedHero);
-//                System.out.println(this.currentNode.m_Attribute);
                 System.out.println("? oui/non");
                 propositionVraie = this.inputUser(new String[]{"oui","non"}).equals("oui");
                 if (propositionVraie) {
-                    //C'est le GG
                     model.changeScore(suggestedHero, this.userResponseIntitule, this.userResponseValue);
                     // End here
                     return;
                 } else {
-                    //OMG YOU SUCK
                     if (questionsFloues.isEmpty()) {
-//                        //on s'a gourré
                         System.out.println("Qui est votre personnage ?");
                         String newHero = inputUser();
                         if(model.characterAlreadyExists(newHero)) {
@@ -76,7 +67,6 @@ public class Game {
                         currentNode = tree;
 
                         String previousQuestion = "";
-//                        while(!newCurrentNode.m_Attribute.name().equals(qFloueCourante)) {
                         while(!previousQuestion.equals(qFloueCourante)) {
                             String currentNodeResponse = userResponseValue.get(userResponseIntitule.indexOf(currentNode.m_Attribute.name()));
                             previousQuestion = currentNode.m_Attribute.name();
@@ -86,9 +76,6 @@ public class Game {
                                 currentNode = currentNode.m_Successors[0];
                             }
                         }
-
-
-    //                    TODO redescendre sur l'arbre
                     }
                 }
             } else {
