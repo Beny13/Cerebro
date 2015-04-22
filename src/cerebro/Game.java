@@ -81,22 +81,29 @@ public class Game {
                 }
             } else {
                 //On est forcement dans un noeud
-                System.out.println(currentNode.m_Attribute.name() + " oui/non/probablement oui/probablement non");
-                userResponseIntitule.add(currentNode.m_Attribute.name());
-                String CurrentResponse = inputUser(new String[]{"oui","non","probablement oui","probablement non"});
-                userResponseValue.add(CurrentResponse);
-                switch(CurrentResponse){
-                    case "probablement oui" :
-                        questionsFloues.add(currentNode.m_Attribute.name());
-                    case "oui" :
-                        currentNode = currentNode.m_Successors[1];
-                        break;
-                    case "probablement non" :
-                        questionsFloues.add(currentNode.m_Attribute.name());
-                    case "non" :
-                        currentNode = currentNode.m_Successors[0];
-                        break;
+                String CurrentResponse;
+                if(userResponseIntitule.indexOf(currentNode.m_Attribute.name())!=-1) {
+                    CurrentResponse = userResponseValue.get(userResponseIntitule.indexOf(currentNode.m_Attribute.name()));
+                } else {
+                
+                    System.out.println(currentNode.m_Attribute.name() + " oui/non/probablement oui/probablement non");
+                    userResponseIntitule.add(currentNode.m_Attribute.name());
+                    CurrentResponse = inputUser(new String[]{"oui","non","probablement oui","probablement non"});
+                    userResponseValue.add(CurrentResponse);
                 }
+                    switch(CurrentResponse){
+                        case "probablement oui" :
+                            questionsFloues.add(currentNode.m_Attribute.name());
+                        case "oui" :
+                            currentNode = currentNode.m_Successors[1];
+                            break;
+                        case "probablement non" :
+                            questionsFloues.add(currentNode.m_Attribute.name());
+                        case "non" :
+                            currentNode = currentNode.m_Successors[0];
+                            break;
+                    }
+                
             }
         }
     }
