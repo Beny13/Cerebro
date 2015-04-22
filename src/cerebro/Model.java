@@ -73,6 +73,8 @@ public class Model {
     }
 
     public void changeScore(String heroName, ArrayList<String> questions, ArrayList<String> userAnswers) {
+        heroName = this.cleanHeroName(heroName);
+
         // Les "peut-etre" sont filtrés
         List<Answer> answers = em
             .createNamedQuery("Answer.findByQuestionNameAndHeroName", Answer.class)
@@ -99,8 +101,12 @@ public class Model {
         this.flush();
     }
 
+    public String cleanHeroName(String heroName) {
+        return heroName.replaceAll(" ", "_").toLowerCase();
+    }
+
     public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, String suggestedHero) {
-        heroName = heroName.replaceAll(" ", "_").toLowerCase();
+        heroName = this.cleanHeroName(heroName);
 
         Question newQuestion = new Question();
         newQuestion.setQuestionText(newQuestionText);
@@ -175,6 +181,7 @@ public class Model {
     }
 
     boolean characterAlreadyExists(String newHero) {
+        newHero = this.cleanHeroName(newHero);
         List<Hero> heros = em
             .createNamedQuery("Hero.findByCharacterName", Hero.class)
             .setParameter("characterName", newHero)
