@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Cerebro {
     public static void main(String[] args) throws Exception {
-        Model model = new Model();
         Scanner sc = new Scanner(System.in);
         do {
+            Model model = new Model();
             model.clear();
             Game game = new Game(model.getTreeFromDB());
             game.start();
