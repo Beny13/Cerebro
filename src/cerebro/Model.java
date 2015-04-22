@@ -99,16 +99,8 @@ public class Model {
         this.flush();
     }
 
-    public static String stripAccents(String s) {
-        s = Normalizer.normalize(s, Normalizer.Form.NFD);
-        s = s.replaceAll("[^\\p{InCombiningDiacriticalMarks}]", "");
-        return s;
-    }
-
     public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, String suggestedHero) {
         heroName = heroName.replaceAll(" ", "_").toLowerCase();
-        System.out.println("OOQSDOSQDOSQDOQSDOQSDOQSDOQSDOQSDOQSDO");
-        System.out.println(heroName);
 
         Question newQuestion = new Question();
         newQuestion.setQuestionText(newQuestionText);
@@ -137,6 +129,7 @@ public class Model {
         this.persist(newAnswer);
 
         // Getting suggestedHeroAnswers
+
         Collection<Answer> suggestedHeroAnswers = em
             .createNamedQuery("Hero.findByCharacterName", Hero.class)
             .setParameter("characterName", suggestedHero)
@@ -146,7 +139,7 @@ public class Model {
 
         // Copying suggestedHeroAnswers to newHero
         for (Answer answerToCopy : suggestedHeroAnswers) {
-            if (answerToCopy.getQuestion().getQuestionText().equals(newQuestionText)) {
+            if (answerToCopy.getQuestion() == null || answerToCopy.getQuestion().getQuestionText().equals(newQuestionText)) {
                 continue;
             }
 
