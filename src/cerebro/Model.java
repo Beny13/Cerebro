@@ -3,6 +3,7 @@ package cerebro;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -92,7 +93,7 @@ public class Model {
         this.flush();
     }
 
-    public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, ArrayList<String> questions, ArrayList<String> answers) {
+    public void addNewHero(String heroName, String newQuestionText, Boolean newAnswerValue, String suggestedHero) {
         Question newQuestion = new Question();
         newQuestion.setQuestionText(newQuestionText);
         this.persist(newQuestion);
@@ -119,6 +120,31 @@ public class Model {
         newAnswer.setAnswerScore(2);
         this.persist(newAnswer);
 
+        // Getting suggestedHeroAnswers
+        Collection<Answer> suggestedHeroAnswers = em
+            .createNamedQuery("Hero.findByCharacterName", Hero.class)
+            .setParameter("characterName", suggestedHero)
+            .getSingleResult()
+            .getAnswerCollection()
+        ;
+
+        // Copying suggestedHeroAnswers to newHero
+        for (Answer answerToCopy : suggestedHeroAnswers) {
+            if (answerToCopy.getQuestion().getQuestionText().equals(newQuestionText)) {
+                continue;
+            }
+
+            Answer copiedAnswer = new Answer();
+            copiedAnswer.setAnswerPK(new AnswerPK(
+                newHero.getCharacterId(),
+                answerToCopy.getAnswerPK().getQuestionId()
+            ));
+            copiedAnswer.setAnswerValue(answerToCopy.getAnswerValue());
+            copiedAnswer.setAnswerScore(2);
+            this.persist(copiedAnswer);
+        }
+
+        /*
         // Adding answers for old questions that have been answered
         int index = 0;
         for (String question : questions) {
@@ -163,6 +189,7 @@ public class Model {
             oldAnswer.setAnswerScore(0);
             this.persist(oldAnswer);
         }
+        */
 
         // Flushing
         this.flush();
