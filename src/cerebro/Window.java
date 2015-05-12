@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cerebro;
 
-/**
- *
- * @author Beny
- */
 public class Window extends javax.swing.JFrame {
     private String currentResponse;
     private String currentRejouerResponse;
     private String currentPropostionResponse;
+    private String currentApprentissagePersonnage;
     private String currentApprentissageResponse;
+    private boolean currentApprentissagePersonnageReady;
+    private boolean currentApprentissageResponseReady;
 
     /**
      * Creates new form Window
@@ -23,7 +17,9 @@ public class Window extends javax.swing.JFrame {
         this.currentResponse = "";
         this.currentRejouerResponse = "";
         this.currentPropostionResponse = "";
+        this.currentApprentissagePersonnage = "";
         this.currentApprentissageResponse = "";
+        this.currentApprentissagePersonnageReady = false;
 
         this.setVisible(true);
 
@@ -35,10 +31,12 @@ public class Window extends javax.swing.JFrame {
         this.jButtonRejouerNon.setFocusPainted(false);
         this.jButtonPropositionOui.setFocusPainted(false);
         this.jButtonPropositionNon.setFocusPainted(false);
-        this.jButtonApprentissageOui.setFocusPainted(false);
-        this.jButtonApprentissageNon.setFocusPainted(false);
+        this.jButtonApprentissagePersonnage.setFocusPainted(false);
+        this.jButtonApprentissageQuestionOui.setFocusPainted(false);
+        this.jButtonApprentissageQuestionNon.setFocusPainted(false);
 
         this.hideAllPanels();
+        this.setCurrentPanel("chargement");
     }
 
     @SuppressWarnings("unchecked")
@@ -66,18 +64,25 @@ public class Window extends javax.swing.JFrame {
         jButtonPropositionOui = new javax.swing.JButton();
         jButtonPropositionNon = new javax.swing.JButton();
         jLabelQuestionMark = new javax.swing.JLabel();
-        PanelApprentissage = new javax.swing.JPanel();
+        PanelApprentissagePersonnage = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLayeredPane5 = new javax.swing.JLayeredPane();
-        jLayeredPane7 = new javax.swing.JLayeredPane();
         jLayeredPane6 = new javax.swing.JLayeredPane();
-        nouvelleQuestion = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         nomNouveauPersonnage = new javax.swing.JTextField();
         jLayeredPane4 = new javax.swing.JLayeredPane();
-        jButtonApprentissageOui = new javax.swing.JButton();
-        jButtonApprentissageNon = new javax.swing.JButton();
+        jButtonApprentissagePersonnage = new javax.swing.JButton();
+        PanelApprentissageQuestion = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLayeredPane8 = new javax.swing.JLayeredPane();
+        jLayeredPane10 = new javax.swing.JLayeredPane();
+        nouvelleQuestion = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLayeredPane11 = new javax.swing.JLayeredPane();
+        jButtonApprentissageQuestionOui = new javax.swing.JButton();
+        jButtonApprentissageQuestionNon = new javax.swing.JButton();
+        PanelChargement = new javax.swing.JPanel();
+        Chargement = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cerebro");
@@ -354,24 +359,10 @@ public class Window extends javax.swing.JFrame {
                 .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        PanelApprentissage.setBackground(new java.awt.Color(255, 255, 255));
+        PanelApprentissagePersonnage.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         jLabel7.setText("Nouveau personnage");
-
-        javax.swing.GroupLayout jLayeredPane7Layout = new javax.swing.GroupLayout(jLayeredPane7);
-        jLayeredPane7.setLayout(jLayeredPane7Layout);
-        jLayeredPane7Layout.setHorizontalGroup(
-            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
-        );
-        jLayeredPane7Layout.setVerticalGroup(
-            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
-        );
-
-        jLabel8.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel8.setText("Question :");
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel9.setText("Personnage :");
@@ -383,16 +374,10 @@ public class Window extends javax.swing.JFrame {
         jLayeredPane6Layout.setHorizontalGroup(
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nouvelleQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nomNouveauPersonnage, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nomNouveauPersonnage, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jLayeredPane6Layout.setVerticalGroup(
@@ -402,14 +387,8 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomNouveauPersonnage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(nouvelleQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
-        jLayeredPane6.setLayer(nouvelleQuestion, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane6.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane6.setLayer(nomNouveauPersonnage, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -421,11 +400,6 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLayeredPane6)
                 .addContainerGap())
-            .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane5Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLayeredPane7)
-                    .addContainerGap()))
         );
         jLayeredPane5Layout.setVerticalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,35 +407,18 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap(72, Short.MAX_VALUE)
                 .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane5Layout.createSequentialGroup()
-                    .addContainerGap(179, Short.MAX_VALUE)
-                    .addComponent(jLayeredPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(1, 1, 1)))
         );
-        jLayeredPane5.setLayer(jLayeredPane7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(jLayeredPane6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButtonApprentissageOui.setBackground(new java.awt.Color(46, 204, 113));
-        jButtonApprentissageOui.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jButtonApprentissageOui.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonApprentissageOui.setText("Oui");
-        jButtonApprentissageOui.setBorder(null);
-        jButtonApprentissageOui.setBorderPainted(false);
-        jButtonApprentissageOui.addActionListener(new java.awt.event.ActionListener() {
+        jButtonApprentissagePersonnage.setBackground(new java.awt.Color(46, 204, 113));
+        jButtonApprentissagePersonnage.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jButtonApprentissagePersonnage.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonApprentissagePersonnage.setText("Oui");
+        jButtonApprentissagePersonnage.setBorder(null);
+        jButtonApprentissagePersonnage.setBorderPainted(false);
+        jButtonApprentissagePersonnage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonApprentissageOuiActionPerformed(evt);
-            }
-        });
-
-        jButtonApprentissageNon.setBackground(new java.awt.Color(231, 76, 60));
-        jButtonApprentissageNon.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jButtonApprentissageNon.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonApprentissageNon.setText("Non");
-        jButtonApprentissageNon.setBorder(null);
-        jButtonApprentissageNon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonApprentissageNonActionPerformed(evt);
+                jButtonApprentissagePersonnageActionPerformed(evt);
             }
         });
 
@@ -469,47 +426,185 @@ public class Window extends javax.swing.JFrame {
         jLayeredPane4.setLayout(jLayeredPane4Layout);
         jLayeredPane4Layout.setHorizontalGroup(
             jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonApprentissageNon, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-            .addComponent(jButtonApprentissageOui, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonApprentissagePersonnage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
         );
         jLayeredPane4Layout.setVerticalGroup(
             jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane4Layout.createSequentialGroup()
                 .addContainerGap(217, Short.MAX_VALUE)
-                .addComponent(jButtonApprentissageOui, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jButtonApprentissageNon, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonApprentissagePersonnage, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
-        jLayeredPane4.setLayer(jButtonApprentissageOui, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane4.setLayer(jButtonApprentissageNon, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane4.setLayer(jButtonApprentissagePersonnage, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout PanelApprentissageLayout = new javax.swing.GroupLayout(PanelApprentissage);
-        PanelApprentissage.setLayout(PanelApprentissageLayout);
-        PanelApprentissageLayout.setHorizontalGroup(
-            PanelApprentissageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanelApprentissagePersonnageLayout = new javax.swing.GroupLayout(PanelApprentissagePersonnage);
+        PanelApprentissagePersonnage.setLayout(PanelApprentissagePersonnageLayout);
+        PanelApprentissagePersonnageLayout.setHorizontalGroup(
+            PanelApprentissagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane4, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissageLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissagePersonnageLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(34, 34, 34))
-            .addGroup(PanelApprentissageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissageLayout.createSequentialGroup()
+                .addGap(32, 32, 32))
+            .addGroup(PanelApprentissagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissagePersonnageLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLayeredPane5)
                     .addContainerGap()))
         );
-        PanelApprentissageLayout.setVerticalGroup(
-            PanelApprentissageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissageLayout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+        PanelApprentissagePersonnageLayout.setVerticalGroup(
+            PanelApprentissagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissagePersonnageLayout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
+                .addGap(54, 54, 54)
                 .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(PanelApprentissageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelApprentissageLayout.createSequentialGroup()
+            .addGroup(PanelApprentissagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelApprentissagePersonnageLayout.createSequentialGroup()
                     .addGap(66, 66, 66)
                     .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(122, Short.MAX_VALUE)))
+        );
+
+        PanelApprentissageQuestion.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
+        jLabel10.setText("Nouvelle question");
+
+        jLabel11.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel11.setText("Question :");
+
+        javax.swing.GroupLayout jLayeredPane10Layout = new javax.swing.GroupLayout(jLayeredPane10);
+        jLayeredPane10.setLayout(jLayeredPane10Layout);
+        jLayeredPane10Layout.setHorizontalGroup(
+            jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane10Layout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nouvelleQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jLayeredPane10Layout.setVerticalGroup(
+            jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane10Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(nouvelleQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        jLayeredPane10.setLayer(nouvelleQuestion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane10.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane8Layout = new javax.swing.GroupLayout(jLayeredPane8);
+        jLayeredPane8.setLayout(jLayeredPane8Layout);
+        jLayeredPane8Layout.setHorizontalGroup(
+            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLayeredPane10)
+                .addContainerGap())
+        );
+        jLayeredPane8Layout.setVerticalGroup(
+            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane8Layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jLayeredPane8.setLayer(jLayeredPane10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButtonApprentissageQuestionOui.setBackground(new java.awt.Color(46, 204, 113));
+        jButtonApprentissageQuestionOui.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jButtonApprentissageQuestionOui.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonApprentissageQuestionOui.setText("Oui");
+        jButtonApprentissageQuestionOui.setBorder(null);
+        jButtonApprentissageQuestionOui.setBorderPainted(false);
+        jButtonApprentissageQuestionOui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonApprentissageQuestionOuiActionPerformed(evt);
+            }
+        });
+
+        jButtonApprentissageQuestionNon.setBackground(new java.awt.Color(231, 76, 60));
+        jButtonApprentissageQuestionNon.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jButtonApprentissageQuestionNon.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonApprentissageQuestionNon.setText("Non");
+        jButtonApprentissageQuestionNon.setBorder(null);
+        jButtonApprentissageQuestionNon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonApprentissageQuestionNonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jLayeredPane11Layout = new javax.swing.GroupLayout(jLayeredPane11);
+        jLayeredPane11.setLayout(jLayeredPane11Layout);
+        jLayeredPane11Layout.setHorizontalGroup(
+            jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButtonApprentissageQuestionNon, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+            .addComponent(jButtonApprentissageQuestionOui, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jLayeredPane11Layout.setVerticalGroup(
+            jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addComponent(jButtonApprentissageQuestionOui, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jButtonApprentissageQuestionNon, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jLayeredPane11.setLayer(jButtonApprentissageQuestionOui, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(jButtonApprentissageQuestionNon, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout PanelApprentissageQuestionLayout = new javax.swing.GroupLayout(PanelApprentissageQuestion);
+        PanelApprentissageQuestion.setLayout(PanelApprentissageQuestionLayout);
+        PanelApprentissageQuestionLayout.setHorizontalGroup(
+            PanelApprentissageQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLayeredPane11, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(PanelApprentissageQuestionLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelApprentissageQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissageQuestionLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLayeredPane8)
+                    .addContainerGap()))
+        );
+        PanelApprentissageQuestionLayout.setVerticalGroup(
+            PanelApprentissageQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelApprentissageQuestionLayout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(PanelApprentissageQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelApprentissageQuestionLayout.createSequentialGroup()
+                    .addGap(66, 66, 66)
+                    .addComponent(jLayeredPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(114, Short.MAX_VALUE)))
+        );
+
+        PanelChargement.setBackground(new java.awt.Color(255, 255, 255));
+
+        Chargement.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
+        Chargement.setText("Chargement");
+
+        javax.swing.GroupLayout PanelChargementLayout = new javax.swing.GroupLayout(PanelChargement);
+        PanelChargement.setLayout(PanelChargementLayout);
+        PanelChargementLayout.setHorizontalGroup(
+            PanelChargementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelChargementLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(Chargement)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        PanelChargementLayout.setVerticalGroup(
+            PanelChargementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelChargementLayout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(Chargement)
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -533,8 +628,18 @@ public class Window extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PanelApprentissage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelApprentissagePersonnage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(20, 20, 20)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelApprentissageQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(9, 9, 9)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelChargement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(19, 19, 19)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -555,8 +660,18 @@ public class Window extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PanelApprentissage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelApprentissagePersonnage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(13, 13, 13)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelApprentissageQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(14, 14, 14)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelChargement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(16, 16, 16)))
         );
 
         pack();
@@ -594,19 +709,26 @@ public class Window extends javax.swing.JFrame {
         this.currentPropostionResponse = "non";
     }//GEN-LAST:event_jButtonPropositionNonActionPerformed
 
-    private void jButtonApprentissageOuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApprentissageOuiActionPerformed
-        this.currentApprentissageResponse = "oui";
-    }//GEN-LAST:event_jButtonApprentissageOuiActionPerformed
+    private void jButtonApprentissagePersonnageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApprentissagePersonnageActionPerformed
+        this.currentApprentissagePersonnage = this.nomNouveauPersonnage.getText();
+        this.currentApprentissagePersonnageReady = true;
+    }//GEN-LAST:event_jButtonApprentissagePersonnageActionPerformed
 
-    private void jButtonApprentissageNonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApprentissageNonActionPerformed
+    private void jButtonApprentissageQuestionOuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApprentissageQuestionOuiActionPerformed
+        this.currentApprentissageResponse = "oui";
+    }//GEN-LAST:event_jButtonApprentissageQuestionOuiActionPerformed
+
+    private void jButtonApprentissageQuestionNonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApprentissageQuestionNonActionPerformed
         this.currentApprentissageResponse = "non";
-    }//GEN-LAST:event_jButtonApprentissageNonActionPerformed
+    }//GEN-LAST:event_jButtonApprentissageQuestionNonActionPerformed
 
     private void hideAllPanels() {
         this.PanelQuestion.hide();
         this.PanelRejouer.hide();
         this.PanelProposition.hide();
-        this.PanelApprentissage.hide();
+        this.PanelApprentissagePersonnage.hide();
+        this.PanelApprentissageQuestion.hide();
+        this.PanelChargement.hide();
     }
 
     public void setCurrentPanel(String panelName) {
@@ -621,8 +743,14 @@ public class Window extends javax.swing.JFrame {
             case "rejouer":
                 this.PanelRejouer.show();
                 break;
-            case "apprentissage":
-                this.PanelApprentissage.show();
+            case "apprentissagePerso":
+                this.PanelApprentissagePersonnage.show();
+                break;
+            case "apprentissageQuestion":
+                this.PanelApprentissageQuestion.show();
+                break;
+            case "chargement":
+                this.PanelChargement.show();
                 break;
         }
     }
@@ -672,6 +800,11 @@ public class Window extends javax.swing.JFrame {
     }
 
     public String getCurrentApprentissagePersonnage() {
+        if (!this.currentApprentissagePersonnageReady)
+            return "";
+
+        this.currentApprentissagePersonnageReady = false;
+
         String res = this.nomNouveauPersonnage.getText();
         this.nomNouveauPersonnage.setText("");
         return res;
@@ -685,12 +818,16 @@ public class Window extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelApprentissage;
+    private javax.swing.JLabel Chargement;
+    private javax.swing.JPanel PanelApprentissagePersonnage;
+    private javax.swing.JPanel PanelApprentissageQuestion;
+    private javax.swing.JPanel PanelChargement;
     private javax.swing.JPanel PanelProposition;
     private javax.swing.JPanel PanelQuestion;
     private javax.swing.JPanel PanelRejouer;
-    private javax.swing.JButton jButtonApprentissageNon;
-    private javax.swing.JButton jButtonApprentissageOui;
+    private javax.swing.JButton jButtonApprentissagePersonnage;
+    private javax.swing.JButton jButtonApprentissageQuestionNon;
+    private javax.swing.JButton jButtonApprentissageQuestionOui;
     private javax.swing.JButton jButtonNon;
     private javax.swing.JButton jButtonOui;
     private javax.swing.JButton jButtonProbNon;
@@ -700,21 +837,24 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRejouerNon;
     private javax.swing.JButton jButtonRejouerOui;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelQuestionMark;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLayeredPane jLayeredPane10;
+    private javax.swing.JLayeredPane jLayeredPane11;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane6;
-    private javax.swing.JLayeredPane jLayeredPane7;
+    private javax.swing.JLayeredPane jLayeredPane8;
     private javax.swing.JTextField nomNouveauPersonnage;
     private javax.swing.JTextField nouvelleQuestion;
     private javax.swing.JLabel propositionText;

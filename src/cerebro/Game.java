@@ -5,17 +5,13 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Damien
- */
 public class Game {
     private final Id3 tree;
     private Id3 currentNode;
-    private Model model;
+    private final Model model;
     private ArrayList<String> userResponseIntitule = new ArrayList<String>();
     private ArrayList<String> userResponseValue = new ArrayList<String>();
-    private Window window;
+    private final Window window;
 
     public Game(Id3 tree) {
         this.tree = tree;
@@ -25,6 +21,7 @@ public class Game {
     }
 
     public void start() {
+        this.window.setCurrentPanel("question");
         boolean propositionVraie = false;
         ArrayList<String> questionsFloues = new ArrayList<String>();
 
@@ -38,23 +35,21 @@ public class Game {
                     return;
                 } else {
                     if (questionsFloues.isEmpty()) {
-                        System.out.println("Qui est votre personnage ?");
-                        String newHero = inputUser();
+                        String newHero = this.getNewHero();
+                        // this.inputButtonUser("apprentissagePerso");
                         if(model.characterAlreadyExists(newHero)) {
-                            System.out.println("Ce personnage existe déjà dans la base de données. Ses informations ont été mises à jour selon vos réponses.");
+                            this.window.setCurrentPanel("chargement");
                             model.changeScore(newHero,this.userResponseIntitule,this.userResponseValue);
                             // End here
                             return;
                         } else {
-                            System.out.println("Entrez une question qui différencie votre personnage de celui proposé : ");
-                            String newQuestion = inputUser();
-                            System.out.println("Quelle est la réponse à cette question pour votre personnage ? oui/non");
-                            String newResponse = inputUser(new String[]{"oui","non"});
+                            String newResponse = this.getNewResponse();
+                            String newQuestion = this.getNewQuestion();
                             boolean ResponseValue;
                             ResponseValue = newResponse.equals("oui");
+                            this.window.setCurrentPanel("chargement");
                             deleteMaybe();
                             model.addNewHero(newHero,newQuestion,ResponseValue,suggestedHero);
-                            System.out.println("Votre héros à bien été ajouté !");
 
                             // End here
                             return;
@@ -108,7 +103,6 @@ public class Game {
         }
     }
 
-
     private String inputUser(String[] rep) {
         Scanner sc = new Scanner(System.in);
         String result = sc.nextLine();
@@ -133,11 +127,22 @@ public class Game {
         }
     }
 
+    public boolean askForReplay() {
+        this.window.setCurrentPanel("rejouer");
+
+        boolean res = this.inputButtonUser("rejouer").equals("oui");
+
+        if (res)
+            this.window.setCurrentPanel("chargement");
+
+        return res;
+    }
+
     private String inputButtonUser(String panelName) {
         String res = "";
         while (res.equals("")) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(150);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -151,7 +156,13 @@ public class Game {
                 case "rejouer":
                     res = window.getCurrentRejouerResponse();
                     break;
-                case "apprentissage":
+                case "apprentissagePerso":
+                    res = window.getCurrentApprentissagePersonnage();
+                    break;
+                case "apprentissageQuestion":
+                    res = window.getCurrentApprentissageQuestion();
+                    break;
+                case "apprentissageReponse":
                     res = window.getCurrentApprentissageResponse();
                     break;
             }
@@ -163,5 +174,20 @@ public class Game {
         this.window.setCurrentPanel("proposition");
         this.window.setCurrentPropostion(suggestedHero);
         return this.inputButtonUser("proposition").equals("oui");
+    }
+
+    private String getNewHero() {
+        this.window.setCurrentPanel("apprentissagePerso");
+        return this.inputButtonUser("apprentissagePerso");
+    }
+
+    private String getNewQuestion() {
+        this.window.setCurrentPanel("apprentissageQuestion");
+        return this.inputButtonUser("apprentissageQuestion");
+    }
+
+    private String getNewResponse() {
+        this.window.setCurrentPanel("apprentissageQuestion");
+        return this.inputButtonUser("apprentissageReponse");
     }
 }
