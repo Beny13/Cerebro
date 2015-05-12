@@ -2,6 +2,8 @@ package cerebro;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,11 +15,13 @@ public class Game {
     private Model model;
     private ArrayList<String> userResponseIntitule = new ArrayList<String>();
     private ArrayList<String> userResponseValue = new ArrayList<String>();
+    private Window window;
 
     public Game(Id3 tree) {
         this.tree = tree;
         this.currentNode = tree;
         this.model = new Model();
+        this.window = new Window();
     }
 
     public void start() {
@@ -27,10 +31,7 @@ public class Game {
         while (!propositionVraie) {
             if (this.currentNode.m_Successors == null) {
                 String suggestedHero = this.currentNode.m_ClassAttribute.value((int) this.currentNode.m_ClassValue);
-                System.out.println("Votre personnnage est-il ");
-                System.out.println(suggestedHero);
-                System.out.println("? oui/non");
-                propositionVraie = this.inputUser(new String[]{"oui","non"}).equals("oui");
+                propositionVraie = this.suggestHero(suggestedHero);
                 if (propositionVraie) {
                     model.changeScore(suggestedHero, this.userResponseIntitule, this.userResponseValue);
                     // End here
@@ -85,10 +86,9 @@ public class Game {
                 if(userResponseIntitule.indexOf(currentNode.m_Attribute.name())!=-1) {
                     CurrentResponse = userResponseValue.get(userResponseIntitule.indexOf(currentNode.m_Attribute.name()));
                 } else {
-                
-                    System.out.println(currentNode.m_Attribute.name() + " oui/non/probablement oui/probablement non");
+                    window.setCurrentQuestion(currentNode.m_Attribute.name());
                     userResponseIntitule.add(currentNode.m_Attribute.name());
-                    CurrentResponse = inputUser(new String[]{"oui","non","probablement oui","probablement non"});
+                    CurrentResponse = inputButtonUser("question");
                     userResponseValue.add(CurrentResponse);
                 }
                     switch(CurrentResponse){
@@ -103,7 +103,7 @@ public class Game {
                             currentNode = currentNode.m_Successors[0];
                             break;
                     }
-                
+
             }
         }
     }
@@ -131,5 +131,37 @@ public class Game {
                 this.userResponseValue.remove(this.userResponseValue.indexOf(s));
             }
         }
+    }
+
+    private String inputButtonUser(String panelName) {
+        String res = "";
+        while (res.equals("")) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            switch (panelName) {
+                case "question":
+                    res = window.getCurrentResponse();
+                    break;
+                case "proposition":
+                    res = window.getCurrentPropostionResponse();
+                    break;
+                case "rejouer":
+                    res = window.getCurrentRejouerResponse();
+                    break;
+                case "apprentissage":
+                    res = window.getCurrentApprentissageResponse();
+                    break;
+            }
+        }
+        return res;
+    }
+
+    private boolean suggestHero(String suggestedHero) {
+        this.window.setCurrentPanel("proposition");
+        this.window.setCurrentPropostion(suggestedHero);
+        return this.inputButtonUser("proposition").equals("oui");
     }
 }
