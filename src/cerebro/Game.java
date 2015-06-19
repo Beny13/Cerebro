@@ -146,8 +146,7 @@ public class Game {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(panelName);
-            
+
             switch (panelName) {
                 case "question":
                     res = window.getCurrentResponse();
