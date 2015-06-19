@@ -13,11 +13,11 @@ public class Game {
     private ArrayList<String> userResponseValue = new ArrayList<String>();
     private final Window window;
 
-    public Game(Id3 tree) {
+    public Game(Id3 tree, Window window) {
         this.tree = tree;
         this.currentNode = tree;
         this.model = new Model();
-        this.window = new Window();
+        this.window = window;
     }
 
     public void start() {
@@ -146,6 +146,8 @@ public class Game {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(panelName);
+            
             switch (panelName) {
                 case "question":
                     res = window.getCurrentResponse();

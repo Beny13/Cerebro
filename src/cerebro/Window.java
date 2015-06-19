@@ -14,12 +14,6 @@ public class Window extends javax.swing.JFrame {
      */
     public Window() {
         initComponents();
-        this.currentResponse = "";
-        this.currentRejouerResponse = "";
-        this.currentPropostionResponse = "";
-        this.currentApprentissagePersonnage = "";
-        this.currentApprentissageResponse = "";
-        this.currentApprentissagePersonnageReady = false;
 
         this.setVisible(true);
 
@@ -35,6 +29,18 @@ public class Window extends javax.swing.JFrame {
         this.jButtonApprentissageQuestionOui.setFocusPainted(false);
         this.jButtonApprentissageQuestionNon.setFocusPainted(false);
 
+        this.reset();
+    }
+    
+    public void reset() {
+        this.currentResponse = "";
+        this.currentRejouerResponse = "";
+        this.currentPropostionResponse = "";
+        this.currentApprentissagePersonnage = "";
+        this.currentApprentissageResponse = "";
+        this.currentApprentissagePersonnageReady = false;
+
+        this.setVisible(true);
         this.hideAllPanels();
         this.setCurrentPanel("chargement");
     }
@@ -181,8 +187,8 @@ public class Window extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addComponent(jLabel1))
                     .addGroup(PanelQuestionLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelQuestionLayout.setVerticalGroup(
@@ -339,13 +345,10 @@ public class Window extends javax.swing.JFrame {
             PanelPropositionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(PanelPropositionLayout.createSequentialGroup()
-                .addGroup(PanelPropositionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelPropositionLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel5))
-                    .addGroup(PanelPropositionLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(propositionText, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45)
+                .addGroup(PanelPropositionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(propositionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         PanelPropositionLayout.setVerticalGroup(
