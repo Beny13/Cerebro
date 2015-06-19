@@ -84,6 +84,7 @@ public class Window extends javax.swing.JFrame {
         jLayeredPane10 = new javax.swing.JLayeredPane();
         nouvelleQuestion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLayeredPane11 = new javax.swing.JLayeredPane();
         jButtonApprentissageQuestionOui = new javax.swing.JButton();
         jButtonApprentissageQuestionNon = new javax.swing.JButton();
@@ -416,7 +417,7 @@ public class Window extends javax.swing.JFrame {
         jButtonApprentissagePersonnage.setBackground(new java.awt.Color(46, 204, 113));
         jButtonApprentissagePersonnage.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButtonApprentissagePersonnage.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonApprentissagePersonnage.setText("Oui");
+        jButtonApprentissagePersonnage.setText("Valider");
         jButtonApprentissagePersonnage.setBorder(null);
         jButtonApprentissagePersonnage.setBorderPainted(false);
         jButtonApprentissagePersonnage.addActionListener(new java.awt.event.ActionListener() {
@@ -477,28 +478,38 @@ public class Window extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel11.setText("Question :");
 
+        jLabel12.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
+        jLabel12.setText("Réponse");
+
         javax.swing.GroupLayout jLayeredPane10Layout = new javax.swing.GroupLayout(jLayeredPane10);
         jLayeredPane10.setLayout(jLayeredPane10Layout);
         jLayeredPane10Layout.setHorizontalGroup(
             jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane10Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane10Layout.createSequentialGroup()
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nouvelleQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jLayeredPane10Layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(jLabel12)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane10Layout.setVerticalGroup(
             jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane10Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(31, 31, 31)
                 .addGroup(jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(nouvelleQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(jLabel12)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane10.setLayer(nouvelleQuestion, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane10.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane10.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane8Layout = new javax.swing.GroupLayout(jLayeredPane8);
         jLayeredPane8.setLayout(jLayeredPane8Layout);
@@ -585,7 +596,7 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(PanelApprentissageQuestionLayout.createSequentialGroup()
                     .addGap(66, 66, 66)
                     .addComponent(jLayeredPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(114, Short.MAX_VALUE)))
+                    .addContainerGap(93, Short.MAX_VALUE)))
         );
 
         PanelChargement.setBackground(new java.awt.Color(255, 255, 255));
@@ -842,6 +853,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
