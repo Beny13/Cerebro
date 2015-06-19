@@ -4,6 +4,10 @@ import java.awt.event.WindowEvent;
 
 public class Cerebro {
     public static void main(String[] args) throws Exception {
+        // Antialiasing
+        System.setProperty("awt.useSystemAAFontSettings","on");
+        System.setProperty("swing.aatext", "true");
+
         boolean replay;
         Window window = new Window();
         do {
@@ -13,7 +17,7 @@ public class Cerebro {
             game.start();
             replay = game.askForReplay();
         } while(replay);
-        
+
         window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
     }
 }
