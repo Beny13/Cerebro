@@ -65,11 +65,11 @@ public class Window extends javax.swing.JFrame {
         jButtonRejouerNon = new javax.swing.JButton();
         PanelProposition = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        propositionText = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jButtonPropositionOui = new javax.swing.JButton();
         jButtonPropositionNon = new javax.swing.JButton();
         jLabelQuestionMark = new javax.swing.JLabel();
+        propositionText = new javax.swing.JLabel();
         PanelApprentissagePersonnage = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLayeredPane5 = new javax.swing.JLayeredPane();
@@ -283,11 +283,8 @@ public class Window extends javax.swing.JFrame {
         PanelProposition.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Le personnage est-il");
-
-        propositionText.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        propositionText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        propositionText.setText("proposition text");
 
         jButtonPropositionOui.setBackground(new java.awt.Color(46, 204, 113));
         jButtonPropositionOui.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
@@ -316,23 +313,35 @@ public class Window extends javax.swing.JFrame {
         jLabelQuestionMark.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelQuestionMark.setText("?");
 
+        propositionText.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
+        propositionText.setForeground(new java.awt.Color(51, 153, 255));
+        propositionText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        propositionText.setText("proposition text");
+
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButtonPropositionNon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonPropositionNon, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
             .addComponent(jButtonPropositionOui, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelQuestionMark, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelQuestionMark, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(propositionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(propositionText, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabelQuestionMark, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addComponent(jButtonPropositionOui, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jButtonPropositionNon, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -340,27 +349,24 @@ public class Window extends javax.swing.JFrame {
         jLayeredPane3.setLayer(jButtonPropositionOui, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jButtonPropositionNon, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabelQuestionMark, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(propositionText, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout PanelPropositionLayout = new javax.swing.GroupLayout(PanelProposition);
         PanelProposition.setLayout(PanelPropositionLayout);
         PanelPropositionLayout.setHorizontalGroup(
             PanelPropositionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLayeredPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(PanelPropositionLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(PanelPropositionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(propositionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPropositionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         PanelPropositionLayout.setVerticalGroup(
             PanelPropositionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPropositionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(propositionText, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
