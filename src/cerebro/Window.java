@@ -31,7 +31,7 @@ public class Window extends javax.swing.JFrame {
 
         this.reset();
     }
-    
+
     public void reset() {
         this.currentResponse = "";
         this.currentRejouerResponse = "";
@@ -90,6 +90,7 @@ public class Window extends javax.swing.JFrame {
         jButtonApprentissageQuestionNon = new javax.swing.JButton();
         PanelChargement = new javax.swing.JPanel();
         Chargement = new javax.swing.JLabel();
+        Chargement1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cerebro");
@@ -604,21 +605,30 @@ public class Window extends javax.swing.JFrame {
         Chargement.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
         Chargement.setText("Chargement");
 
+        Chargement1.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
+        Chargement1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loading.gif"))); // NOI18N
+
         javax.swing.GroupLayout PanelChargementLayout = new javax.swing.GroupLayout(PanelChargement);
         PanelChargement.setLayout(PanelChargementLayout);
         PanelChargementLayout.setHorizontalGroup(
             PanelChargementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelChargementLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(Chargement)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addGroup(PanelChargementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Chargement)
+                    .addGroup(PanelChargementLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(Chargement1)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         PanelChargementLayout.setVerticalGroup(
             PanelChargementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelChargementLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
+                .addGap(51, 51, 51)
                 .addComponent(Chargement)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(Chargement1)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -833,6 +843,7 @@ public class Window extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Chargement;
+    private javax.swing.JLabel Chargement1;
     private javax.swing.JPanel PanelApprentissagePersonnage;
     private javax.swing.JPanel PanelApprentissageQuestion;
     private javax.swing.JPanel PanelChargement;
