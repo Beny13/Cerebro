@@ -73,6 +73,8 @@ public class Game {
                                 currentNode = currentNode.m_Successors[0];
                             }
                         }
+
+                        this.window.setCurrentPanel("question");
                     }
                 }
             } else {
